@@ -23,12 +23,11 @@ export function LocationProvider({ children }) {
     } else {
       setError("Geolocation is not supported by this browser");
     }
-  }, []);
+  }, [loaded]);
 
   useEffect(() => {
     if (location.latitude !== null && location.longitude !== null) {
       setLoaded(true);
-      console.log("güncellenmiş hali",location);
     }
   }, [location]);
 

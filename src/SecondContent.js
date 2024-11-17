@@ -3,7 +3,7 @@ import SearchCity from "./components/SearchCity";
 import HourlyWeather from "./components/HourlyWeather";
 
 function SecondContent() {
-  const[fullTime, setFullTime] = useState("");
+  const [fullTime, setFullTime] = useState("");
 
   const timeState = () => {
     const hour = fullTime.substring(0, 2);
@@ -16,15 +16,18 @@ function SecondContent() {
     } else {
       return "Good Night!";
     }
-  }
+  };
   useEffect(() => {
+    const time = new Date();
+    setFullTime(
+      `${time.getHours() < 10 ? "0" + time.getHours() : time.getHours()}.${
+        time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes()
+      }`
+    );
     const interval = setInterval(() => {
-      const time = new Date();
       setFullTime(
-        `${time.getHours() < 10 ? "0" + time.getHours() : time.getHours()}:${
+        `${time.getHours() < 10 ? "0" + time.getHours() : time.getHours()}.${
           time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes()
-        }:${
-          time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds()
         }`
       );
     }, 1000);
@@ -41,8 +44,8 @@ function SecondContent() {
       <div className="mt-12">
         <SearchCity />
       </div>
-      <div>
-          <HourlyWeather/>
+      <div className="!w-full overflow-hidden">
+        <HourlyWeather />
       </div>
     </div>
   );

@@ -6,21 +6,21 @@ const ApiContext = createContext();
 
 export function ApiProvider({ children }) {
   const [result, setResult] = useState(null);
-  const { location, loaded, error } = useContext(LocationContext);
+  const { location, loaded } = useContext(LocationContext);
   const [query, setQuery] = useState(null);
 useEffect(() => {
     if (loaded) {
       setQuery(`${location.latitude},${location.longitude}`);
     } else {
       setQuery("istanbul turkey");
-      error && alert(error);
     }
-  }, [location, loaded, error]);
+  }, [location, loaded]);
 
   useEffect(() => {
     const getApi = async () => {
       try {
-        if (location) {
+        if (query) {
+          
           const getResult = await axios.get(
             `${process.env.REACT_APP_WEATHER_API_URL}${process.env.REACT_APP_WEATHER_API_KEY}&q=${query}&days=5&aqi=no&alerts=no`
           );
