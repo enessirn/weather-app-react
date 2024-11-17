@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
+import ApiContext from "../context/ApiContext";
 function SearchCity() {
+  const { setQuery } = useContext(ApiContext);
   const [term, setTerm] = useState("");
-  useEffect(() => {
-    console.log(term);
-  }, [term]);
-  
+
+  const updateQuery = (e) => {
+    e.preventDefault();
+    setTerm(term.trim())
+    setQuery(term)
+    setTerm("")
+  }
   return (
-    <div>
+    <form onSubmit={updateQuery}>
       <input
         className="outline-none border-none w-80 text-[20px] px-4 rounded-xl h-12"
         placeholder="Enter a city... e.g Samsun"
@@ -15,7 +20,7 @@ function SearchCity() {
         onChange={(e) => setTerm(e.target.value)}
         required
       />
-    </div>
+    </form>
   );
 }
 
