@@ -1,4 +1,3 @@
-// import { useEffect,useState } from "react";
 import "./App.css";
 import Container from "./Container";
 import { ApiProvider } from "./context/ApiContext";

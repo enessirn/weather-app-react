@@ -9,10 +9,10 @@ function SecondContent() {
     const hour = fullTime.substring(0, 2);
     if (hour > 17) {
       return "Good Evening!";
-    } else if (hour > 5) {
-      return "Good Morning!";
     } else if (hour > 11) {
       return "Good Afternoon!";
+    } else if (hour > 5) {
+      return "Good Morning!";
     } else {
       return "Good Night!";
     }

@@ -5,7 +5,7 @@ const LocationContext = createContext();
 export function LocationProvider({ children }) {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [error, setError] = useState(null);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -15,21 +15,18 @@ export function LocationProvider({ children }) {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
+          setLoaded(true)
         },
         (err) => {
           setError(err.message);
+          setLoaded(false)
         }
       );
     } else {
       setError("Geolocation is not supported by this browser");
+      setLoaded(false)
     }
   }, [loaded]);
-
-  useEffect(() => {
-    if (location.latitude !== null && location.longitude !== null) {
-      setLoaded(true);
-    }
-  }, [location]);
 
   return (
     <LocationContext.Provider value={{ location, error, loaded, setLocation }}>

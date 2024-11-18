@@ -4,11 +4,9 @@ import CurrentTemperature from "./components/CurrentTemperature";
 import WeeklyWeather from "./components/WeeklyWeather";
 import SecondContent from "./SecondContent";
 
-
 function Container() {
-  
   return (
-    <div className="container max-w-[1200px] mx-auto bg-secondary-light h-[600px] flex justify-between rounded-3xl">
+    <div className="container !select-none max-w-[1200px] mx-auto bg-secondary-light h-[600px] flex justify-between rounded-3xl">
       <div className="w-full rounded-3xl h-full scale-75 md:scale-100">
         <DateAndLocation />
         <CurrentTemperature />

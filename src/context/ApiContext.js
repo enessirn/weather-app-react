@@ -8,7 +8,8 @@ export function ApiProvider({ children }) {
   const [result, setResult] = useState(null);
   const { location, loaded } = useContext(LocationContext);
   const [query, setQuery] = useState(null);
-useEffect(() => {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
     if (loaded) {
       setQuery(`${location.latitude},${location.longitude}`);
     } else {
@@ -20,27 +21,25 @@ useEffect(() => {
     const getApi = async () => {
       try {
         if (query) {
-          
           const getResult = await axios.get(
             `${process.env.REACT_APP_WEATHER_API_URL}${process.env.REACT_APP_WEATHER_API_KEY}&q=${query}&days=5&aqi=no&alerts=no`
           );
 
           setResult(getResult.data);
+          setLoading(true);
         }
       } catch (error) {
         console.error("Error", error);
       }
     };
     getApi();
-  }, [location,query]);
+  }, [query]);
 
-  useEffect(() => {
-    if (loaded) {
-      console.log(result);
-    }
-  }, [loaded,result]);
-
-  return <ApiContext.Provider value={{result, setQuery}}>{children}</ApiContext.Provider>;
+  return (
+    <ApiContext.Provider value={{ result, setQuery, loading }}>
+      {children}
+    </ApiContext.Provider>
+  );
 }
 
 export default ApiContext;
