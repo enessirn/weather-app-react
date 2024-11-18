@@ -5,15 +5,14 @@ import { LocationProvider } from "./context/LocationContext";
 import "./index.css";
 function App() {
   return (
-    <div className="bg-border-light min-h-screen min-w-full flex items-center">
-      <main>
+    <main className="bg-border-light min-h-screen min-w-full flex items-center">
+
         <LocationProvider>
           <ApiProvider>
             <Container />
           </ApiProvider>
         </LocationProvider>
-      </main>
-    </div>
+    </main>
   );
 }
 
